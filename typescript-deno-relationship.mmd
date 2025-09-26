@@ -1,0 +1,12 @@
+graph TD
+    A[TypeScript Code] --> B{Deno Runtime}
+    B --> C[Built-in TypeScript Compiler]
+    C --> D[V8 Engine]
+    D --> E[Executes JavaScript]
+
+    A -- "Directly processed by" --> C
+    C -- "Outputs JavaScript to" --> D
+    B -- "Leverages" --> D
+    B -- "Provides" --> F[Type Safety Benefits]
+    F -- "From" --> A
+    B -- "Eliminates need for" --> G["Separate Transpilation Step (e.g., Babel, tsc)"]
