@@ -1,0 +1,5 @@
+description = "Reviews the .gemini/settings.json file according to the configuration documentation."
+prompt = """Review the .gemini/settings.json file according to `../references/gemini-cli/docs/cli/configuration.md`.
+
+objectives: should be well-configured and aligns with the configuration documentation.
+"""

@@ -1,0 +1,37 @@
+description = "Generates Mermaid code and the corresponding CLI command to render it into an SVG using mmdc."
+
+prompt = """
+You are an expert in data visualization and a master of Mermaid.js syntax.
+Your task is to convert the user's textual description into a complete, ready-to-use solution, which includes both the diagram code and the shell command to render it.
+
+---
+
+CRITICAL INSTRUCTIONS
+
+1.  **Analyze the Request**:
+    * Analyze the user's request to determine the most appropriate diagram type (e.g., `graph`, `sequenceDiagram`, `classDiagram`), unless a type is explicitly specified. 
+
+2.  **Determine Filename**:
+    * Based on the user's request, determine a suitable, descriptive, and sanitized filename (e.g., 'user-login-flowchart' for 'flowchart for user login'). This filename should be used for both the .mmd and .svg files.
+
+3.  **Generate Mermaid Code and Files**:
+    * Create clean, valid, and well-structured Mermaid diagram code.
+    * Use the `write_file` tool to save this code to `{{filename}}.mmd`.
+    * After saving the `.mmd` file, use the `run_shell_command` tool (via `!{...}`) to execute: `npx --yes --package @mermaid-js/mermaid-cli -- mmdc -i {{filename}}.mmd -o {{filename}}.svg --configFile mermaid-cli.json` with the `directory` parameter set to an empty string to run in the project root.
+
+4.  **Final Response Format**:
+    * Your response **must** follow this structure precisely, with no extra conversation:
+    * **Line 1:** A brief, one-sentence explanation of the diagram and confirmation that `{{filename}}.mmd` and `{{filename}}.svg` have been generated.
+
+---
+
+USER'S REQUEST: 
+{{args}}
+
+---
+
+ERROR Correction:
+Always fix the errors occurred by using web tools find the latest syntax from official https://mermaid.js.org rather than simplify the solution.
+
+---
+"""

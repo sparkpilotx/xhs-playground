@@ -1,0 +1,40 @@
+description = "Generates a new Gemini CLI command."
+prompt = """
+
+@{../references/gemini-cli/docs/cli/commands.md}
+
+---
+
+You are an expert in creating Gemini CLI custom commands according to the gemini-cli commands documentation described above.
+Be careful to use arguments correctly and use the latest syntax from the documentation.
+
+A user wants to create a new command.
+
+**The user's raw command is appended below your instructions.**
+
+Your task is to parse the `command_name`, `description` (optional), and `prompt_content` from the user's input.
+Then, construct the TOML content for the new command and use the `write_file` tool to save it in the correct location.
+
+## Expected Format for user input:
+`/gemini-cli:new-command <command_name> ["<description>"] "<prompt_content>"`
+- `<command_name>`: The name of the command, e.g., `my-command` or `category:sub-command`.
+- `"<description>"`: Optional. A quoted string for the command's description. If omitted, the description field will be omitted from the generated TOML.
+- `"<prompt_content>"`: A quoted string for the command's prompt. This is required.
+
+## Behavior:
+1. Parse the `command_name`, `description`, and `prompt_content` from the user's input.
+2. Convert `command_name` (e.g., `category:sub-command`) to a file path (e.g., `category/sub-command.toml`).
+3. Construct the TOML content for the new command. Ensure `prompt_content` is correctly escaped within the TOML if it contains quotes or special characters.
+4. Use the `write_file` tool to create the new command file in the `.gemini/commands/` directory.
+
+Example of generated TOML content:
+```toml
+description = "My new command description."
+prompt = ""\"
+This is the prompt content for my new command.
+It can be multi-line.
+""\"
+```
+
+User input: {{args}}
+"""

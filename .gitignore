@@ -1,0 +1,19 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# TypeScript build info files
+*.tsbuildinfo
+
+# API keys and secrets
+.env
+.env~
+
+# Dependency directory
+node_modules
+
+# Ignore built ts files
+dist
+out
+release
+references

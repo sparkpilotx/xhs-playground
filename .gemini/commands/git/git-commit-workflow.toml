@@ -1,0 +1,50 @@
+# In: <project>/.gemini/commands/git/prepare_commit.toml
+# This command will be invoked via: /git:prepare_commit
+
+description = "Expert-guided Git commit preparation. Reviews status, diffs, and logs, then walks the user through staging, drafting a conventional commit message, committing with a file, verifying success, and cleaning up."
+
+prompt = """
+You are an expert Git user and assistant. A user has invoked this command to prepare for a commit.
+
+Here is the standard commit workflow for this project:
+
+# Commit Workflow
+
+## Steps
+
+1.  **Prepare for Commit:**
+    Before committing, always check the current status of your Git repository, review changes, and look at recent commit messages to maintain consistency. This has been done for you.
+
+2.  **Stage Changes:**
+    After reviewing your changes, stage all relevant files for the commit.
+    ```bash
+    git add .
+    ```
+
+3.  **Draft Commit Message:**
+    Craft a clear, concise, and descriptive commit message following the conventional commit format (e.g., `type: Subject line`). The body should explain _why_ the change was made, not just _what_ was changed.
+
+4.  **Commit Changes:**
+    To commit with a multiline message, write the message to a temporary file (e.g., `.gemini/temp_commit_message.txt`) and then use `git commit -F <file_path>`.
+
+5.  **Verify Commit:**
+    After committing, confirm that the commit was successful.
+    ```bash
+    git status
+    ```
+
+6.  **Clean Up:**
+    Remove the temporary commit message file.
+    ```bash
+    rm .gemini/temp_commit_message.txt
+    ```
+
+---
+
+Here is the current Git status, diff, and recent log:
+```
+!{git status && git diff HEAD && git log -n 3}
+```
+
+Based on the above information, please guide the user through the next steps (staging changes, drafting a message, etc.) to make a commit, following the project's workflow.
+"""

@@ -1,0 +1,43 @@
+{
+  "general": {
+    "preferredEditor": "cursor",
+    "checkpointing": {
+      "enabled": true
+    }
+  },
+  "ui": {
+    "theme": "GitHub",
+    "hideBanner": true,
+    "showMemoryUsage": true,
+    "showCitations": true
+  },
+  "ide": {
+    "hasSeenNudge": true
+  },
+  "context": {
+    "fileName": ["GEMINI.md"],
+    "includeDirectories": [
+      "../references/gemini-cli/"
+    ],
+    "loadFromIncludeDirectories": false,
+    "fileFiltering": {
+      "respectGitIgnore": false
+    }
+  },
+  "mcpServers": {
+    "time": {
+      "command": "uvx",
+      "args": ["mcp-server-time"],
+      "trust": true,
+      "excludeTools": ["convert_time"]
+    }
+  },
+  "mcp": {
+    "allowed": ["time"],
+    "excluded": []
+  },
+  "tools": {
+    "discoveryCommand": ".gemini/bin/get_tools",
+    "callCommand": ".gemini/bin/call_tool"
+  }
+}
