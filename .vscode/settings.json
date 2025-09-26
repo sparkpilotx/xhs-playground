@@ -1,6 +1,8 @@
 {
     "deno.enable": true,
     "deno.enablePaths": [
-        "./scripts/xhs-login"
+        "./scripts/xhs-login",
+        "./scripts/twitter-login",
+        "./scripts/youtube-login"
     ]
 }

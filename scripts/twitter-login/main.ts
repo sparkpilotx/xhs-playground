@@ -1,21 +1,19 @@
 import { launch } from "@astral/astral";
 import { join } from "@std/path";
 
-const XIAOHONGSHU_URL = "https://www.xiaohongshu.com/explore";
-const LOGIN_STATUS_SELECTOR = ".main-container .user .link-wrapper .channel";
-// const QRCODE_SELECTOR = ".login-container .qrcode-img"; // unused currently
+const TWITTER_URL = "https://x.com/home";
+const LOGIN_STATUS_SELECTOR = '[data-testid="AppTabBar_Profile_Link"]';
 
 async function main(): Promise<void> {
   const userHomeDir = Deno.env.get("HOME");
   if (!userHomeDir) {
     throw new Error("HOME environment variable is not set");
   }
-  const xhsHomeDir = join(userHomeDir, ".xiaohongshu");
-  await Deno.mkdir(xhsHomeDir, { recursive: true });
-  const cookiePath = join(xhsHomeDir, "cookies.json");
+  const twitterHomeDir = join(userHomeDir, ".twitter");
+  await Deno.mkdir(twitterHomeDir, { recursive: true });
+  const cookiePath = join(twitterHomeDir, "cookies.json");
   console.log(cookiePath);
 
-  // Try to read existing cookies if any
   let cookies: unknown = [];
   try {
     const cookieData = await Deno.readTextFile(cookiePath);
@@ -23,7 +21,6 @@ async function main(): Promise<void> {
     if (!Array.isArray(cookies)) cookies = [];
   } catch (err) {
     if (err instanceof Deno.errors.NotFound) {
-      // No cookie file yet; proceed without cookies
       cookies = [];
     } else {
       throw err;
@@ -32,7 +29,7 @@ async function main(): Promise<void> {
 
   const browser = await launch({
     headless: false,
-    path: Deno.env.get("CHROME_PATH") ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    // path: Deno.env.get("CHROME_PATH") ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
   });
 
   try {
@@ -42,13 +39,10 @@ async function main(): Promise<void> {
       await page.setCookies(cookies as unknown as Parameters<typeof page.setCookies>[0]);
     }
 
-    await page.goto(XIAOHONGSHU_URL);
+    await page.goto(TWITTER_URL);
 
-    // Fast check once loaded
     let isLoggedIn = !!(await page.$(LOGIN_STATUS_SELECTOR));
-
     if (!isLoggedIn) {
-      // Poll with timeout (max ~60s)
       const timeoutMs = 60_000;
       const intervalMs = 500;
       const start = Date.now();
@@ -63,20 +57,19 @@ async function main(): Promise<void> {
       throw new Error("Login not detected within timeout");
     }
 
-    // Persist fresh cookies
     const freshCookies = await page.cookies();
     await Deno.writeTextFile(cookiePath, JSON.stringify(freshCookies, null, 2));
-
     console.log("Logged in.");
   } finally {
     await browser.close();
   }
 }
 
-// Learn more at https://docs.deno.com/runtime/manual/examples/module_metadata#concepts
 if (import.meta.main) {
   await main().catch((err) => {
     console.error(err);
     Deno.exit(1);
   });
 }
+
+
