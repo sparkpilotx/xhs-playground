@@ -1,0 +1,8 @@
+references
+node_modules
+out
+release
+dist
+build
+*.log
+.DS_Store

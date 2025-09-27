@@ -1,0 +1,14 @@
+{
+  "theme": "default",
+  "themeVariables": {
+    "primaryColor": "#ECECFF",
+    "primaryBorderColor": "#9370DB",
+    "primaryTextColor": "#333",
+    "secondaryColor": "#fff",
+    "tertiaryColor": "#f0f0f0",
+    "lineColor": "#333",
+    "textColor": "#333"
+  },
+  "fontFamily": "sans-serif",
+  "fontSize": "16px"
+}

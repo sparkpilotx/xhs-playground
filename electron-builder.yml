@@ -1,0 +1,30 @@
+appId: com.simonxing.electrongeminstarter
+productName: Electron Gemini Starter
+artifactName: "${productName}-${version}-${os}-${arch}.${ext}"
+
+directories:
+  output: release
+  buildResources: build
+
+asar: true
+
+# Speed up when no native deps are used
+npmRebuild: false
+compression: maximum
+
+files:
+  - out/**/*
+  - node_modules/**/*
+  - package.json
+  - "!**/*.map"
+  - "!**/.DS_Store"
+
+extraMetadata:
+  main: ./out/main/index.js
+
+mac:
+  category: public.app-category.developer-tools
+  identity: null
+  gatekeeperAssess: false
+  target:
+    - target: dmg
