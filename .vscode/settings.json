@@ -4,5 +4,8 @@
         "./scripts/xhs-login",
         "./scripts/twitter-login",
         "./scripts/youtube-login"
-    ]
+    ],
+    "files.exclude": {
+        "**/node_modules": true,
+    }
 }
