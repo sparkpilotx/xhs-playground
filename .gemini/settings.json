@@ -16,10 +16,7 @@
   },
   "context": {
     "fileName": ["GEMINI.md"],
-    "includeDirectories": [
-      "../references/gemini-cli/",
-      "../references/misc/xiaohongshu-mcp/"
-    ],
+    "includeDirectories": ["../references/gemini-cli/", "../references/misc/xiaohongshu-mcp/"],
     "loadFromIncludeDirectories": false,
     "fileFiltering": {
       "respectGitIgnore": false

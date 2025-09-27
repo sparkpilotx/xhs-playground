@@ -16,6 +16,7 @@ export default defineConfig(
       "**/dist/**",
       "**/build/**",
       "**/references/**",
+      "**/scripts/**",
       "eslint.config.*",
       "prettier.config.*",
     ],

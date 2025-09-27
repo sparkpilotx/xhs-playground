@@ -1,5 +1,5 @@
-appId: com.simonxing.electrongeminstarter
-productName: Electron Gemini Starter
+appId: com.simonxing.electronxhsplayground
+productName: Electron XHS Playground
 artifactName: "${productName}-${version}-${os}-${arch}.${ext}"
 
 directories:

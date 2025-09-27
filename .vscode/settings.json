@@ -1,11 +1,7 @@
 {
-    "deno.enable": true,
-    "deno.enablePaths": [
-        "./scripts/xhs-login",
-        "./scripts/twitter-login",
-        "./scripts/youtube-login"
-    ],
-    "files.exclude": {
-        "**/node_modules": true,
-    }
+  "deno.enable": true,
+  "deno.enablePaths": ["./scripts/xhs-login", "./scripts/twitter-login", "./scripts/youtube-login"],
+  "files.exclude": {
+    "**/node_modules": true
+  }
 }
