@@ -1,6 +1,8 @@
 import { app, nativeTheme, BrowserWindow, ipcMain } from "electron";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { IPC_CHANNELS } from "@shared/ipc-channels";
+import type { ShowcaseEchoRequest } from "@shared/ipc";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -100,12 +102,20 @@ app.on("activate", () => {
   }
 });
 
-void app.whenReady().then(() => {
+void app.whenReady().then(async () => {
   nativeTheme.themeSource = "system";
 
   if (!app.isPackaged) {
   } else {
   }
 
+  ipcMain.handle(IPC_CHANNELS.SHOWCASE_ECHO, async (_, request: ShowcaseEchoRequest) => {
+    await Promise.resolve(); // Added to satisfy @typescript-eslint/require-await
+    return {
+      message: `Hello, ${request.message}!`,
+    };
+  });
+
   createMainWindow();
+  await Promise.resolve();
 });
