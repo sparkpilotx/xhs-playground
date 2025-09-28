@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Echo } from "@/showcase/components/echo";
+import { Echo } from "@/showcase";
 
 export default function App() {
   return (
