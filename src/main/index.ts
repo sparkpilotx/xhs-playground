@@ -95,4 +95,6 @@ void app.whenReady().then(() => {
   if (!app.isPackaged) {
   } else {
   }
+
+  createMainWindow();
 });

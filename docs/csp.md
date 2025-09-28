@@ -19,6 +19,7 @@ The CSP directives are set conditionally based on the `app.isPackaged` property:
 In the development environment, a more relaxed CSP is applied to accommodate development tools like Vite, which may inject inline scripts or use `eval`.
 
 **Directives:**
+
 - `default-src 'self'`
 - `img-src 'self' https: data:`
 - `connect-src 'self' https:`
@@ -30,6 +31,7 @@ In the development environment, a more relaxed CSP is applied to accommodate dev
 In the production environment, a stricter CSP is enforced to enhance security by disallowing inline scripts and styles.
 
 **Directives:**
+
 - `default-src 'self'`
 - `img-src 'self' https: data:`
 - `connect-src 'self' https:`
