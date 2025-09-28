@@ -4,6 +4,7 @@
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
+    "module": "ESNext",
     "tsBuildInfoFile": "node_modules/.cache/tsc/tsconfig.node.tsbuildinfo",
     "moduleResolution": "bundler",
     "baseUrl": ".",
