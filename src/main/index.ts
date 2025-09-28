@@ -24,10 +24,21 @@ function getRendererUrl(): string {
 function createMainWindow() {
   if (mainWindow) return;
 
+  const ASPECT_RATIO = 16 / 9;
+  const MIN_WIDTH = 1000;
+  const INITIAL_WIDTH = 1000;
+  const INITIAL_HEIGHT = Math.round(INITIAL_WIDTH / ASPECT_RATIO);
+  const MIN_HEIGHT = Math.round(MIN_WIDTH / ASPECT_RATIO);
+
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: INITIAL_WIDTH,
+    height: INITIAL_HEIGHT,
+    minWidth: MIN_WIDTH,
+    minHeight: MIN_HEIGHT,
     show: false,
+    maximizable: false,
+    fullscreenable: false,
+    title: "Xiaohongshu Playground",
     webPreferences: {
       preload: getPreloadPath(),
       contextIsolation: true,
