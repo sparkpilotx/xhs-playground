@@ -12,6 +12,7 @@ export default defineConfig({
         "@core": resolve("src/main/core"),
         "@utils": resolve("src/main/utils"),
         "@windows": resolve("src/main/windows"),
+        "@services": resolve("src/main/services"),
       },
     },
   },

@@ -12,7 +12,8 @@
       "@shared/*": ["src/shared/*"],
       "@core/*": ["src/main/core/*"],
       "@utils/*": ["src/main/utils/*"],
-      "@windows/*": ["src/main/windows/*"]
+      "@windows/*": ["src/main/windows/*"],
+      "@services/*": ["src/main/services/*"]
     }
   }
 }
