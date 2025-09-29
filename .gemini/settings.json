@@ -28,10 +28,14 @@
       "args": ["mcp-server-time"],
       "trust": true,
       "excludeTools": ["convert_time"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"]
     }
   },
   "mcp": {
-    "allowed": ["time"],
+    "allowed": ["time", "chrome-devtools"],
     "excluded": []
   },
   "tools": {
