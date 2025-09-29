@@ -2,6 +2,7 @@ import { app, nativeTheme, BrowserWindow, ipcMain } from "electron";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { registerShowcaseServices, unregisterShowcaseServices } from "@services/showcase";
+import { enableUndiciDispatcher } from "@services/network-proxy";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -108,6 +109,7 @@ void app.whenReady().then(async () => {
   } else {
   }
 
+  enableUndiciDispatcher();
   registerShowcaseServices(ipcMain);
 
   createMainWindow();
