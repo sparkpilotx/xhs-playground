@@ -1,0 +1,23 @@
+graph TD
+    NodeJS[Node.js Runtime] --> A[Main Process]
+
+    subgraph Electron Application
+        A
+        subgraph Renderer Process
+            P(Preload Script)
+            C(UI Layer)
+            P --> C
+            V8[Browser's V8 Runtime] --> C
+        end
+    end
+
+    A --> P
+    P --> D(Shared)
+    C --> D
+
+    style NodeJS fill:#afa,stroke:#333,stroke-width:2px
+    style V8 fill:#afa,stroke:#333,stroke-width:2px
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style P fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#ccf,stroke:#333,stroke-width:2px
+    style D fill:#afa,stroke:#333,stroke-width:2px

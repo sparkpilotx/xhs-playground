@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant R as UI Layer (Renderer Process)
+    participant P as Preload Script
+    participant M as Main Process
+
+    note over R,P: Preload Script runs in an isolated context within the Renderer Process.
+
+    R->>P: Request data/action
+    P->>M: Forward request (IPC)
+    M-->>P: Send response (IPC)
+    P-->>R: Forward response
