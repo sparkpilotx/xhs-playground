@@ -7,8 +7,13 @@ import {
 } from "@shared/ipc";
 import { createGeminiClient } from "@utils/gemini";
 import type { GoogleGenAI } from "@google/genai";
+import type { LLM } from "@lmstudio/sdk";
+import { Chat } from "@lmstudio/sdk";
+
+import { createGptOssClient } from "@utils/gpt-oss";
 
 let gemini: GoogleGenAI | null = null;
+let gptOss: LLM | null = null;
 
 async function handleEcho(
   _: IpcMainInvokeEvent,
@@ -43,6 +48,47 @@ async function handleEcho(
       }
     } catch (error) {
       console.error("Failed to generate Gemini echo response", error);
+    }
+  }
+
+  if (!gptOss) {
+    gptOss = await createGptOssClient();
+  }
+
+  if (gptOss) {
+    const chat = Chat.empty();
+    chat.append(
+      "system",
+      "You are a concise, upbeat assistant. Craft a short acknowledgement that references the user's message.",
+    );
+    chat.append("user", request.message);
+
+    try {
+      const response = await gptOss.respond(chat);
+      const rawResponse = response.content;
+      const finalMessageMarker = "<|channel|>final<|message|>";
+      const finalMessageIndex = rawResponse.indexOf(finalMessageMarker);
+
+      if (finalMessageIndex !== -1) {
+        const generated = rawResponse
+          .substring(finalMessageIndex + finalMessageMarker.length)
+          .trim();
+        if (generated) {
+          return ShowcaseEchoResponseSchema.parse({
+            message: generated,
+          });
+        }
+      } else {
+        // Fallback for non-harmony responses
+        const generated = rawResponse.trim();
+        if (generated) {
+          return ShowcaseEchoResponseSchema.parse({
+            message: generated,
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Failed to generate GPT OSS echo response", error);
     }
   }
 
