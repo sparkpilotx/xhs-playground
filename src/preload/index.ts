@@ -1,14 +1,20 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { IPC_CHANNELS } from "@shared/ipc-channels";
-import type { ShowcaseEchoRequest, ShowcaseEchoResponse } from "@shared/ipc";
+import {
+  ShowcaseEchoRequestSchema,
+  ShowcaseEchoResponseSchema,
+  type ShowcaseEchoRequest,
+  type ShowcaseEchoResponse,
+} from "@shared/ipc";
 
 const showcase = {
   echo: async (request: ShowcaseEchoRequest): Promise<ShowcaseEchoResponse> => {
-    const response = (await ipcRenderer.invoke(
+    const parsedRequest = ShowcaseEchoRequestSchema.parse(request);
+    const rawResponse: unknown = await ipcRenderer.invoke(
       IPC_CHANNELS.SHOWCASE_ECHO,
-      request,
-    )) as ShowcaseEchoResponse;
-    return response;
+      parsedRequest,
+    );
+    return ShowcaseEchoResponseSchema.parse(rawResponse);
   },
 };
 

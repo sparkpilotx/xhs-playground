@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { ShowcaseEchoRequestSchema } from "@shared/ipc";
 import { echoService } from "@/showcase/lib/echo-service";
 
 export function useEcho() {
@@ -13,9 +14,7 @@ export function useEcho() {
     setError(null);
     setResponse(null);
     try {
-      if (!message || message.trim().length === 0) {
-        throw new Error("Message cannot be empty");
-      }
+      ShowcaseEchoRequestSchema.parse({ message });
       const echoed = await echoService.echoMessage(message);
       setResponse(echoed);
     } catch (err) {
