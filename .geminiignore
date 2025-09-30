@@ -15,3 +15,5 @@ node_modules
 # Ignore built ts files
 release
 out
+
+.codex/
