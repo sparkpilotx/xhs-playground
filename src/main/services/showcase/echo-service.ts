@@ -6,13 +6,18 @@ import {
   type ShowcaseEchoResponse,
 } from "@shared/ipc";
 import { createGeminiClient } from "@utils/gemini";
+import type { GoogleGenAI } from "@google/genai";
+
+let gemini: GoogleGenAI | null = null;
 
 async function handleEcho(
   _: IpcMainInvokeEvent,
   rawRequest: unknown,
 ): Promise<ShowcaseEchoResponse> {
   const request = ShowcaseEchoRequestSchema.parse(rawRequest);
-  const gemini = createGeminiClient();
+  if (!gemini) {
+    gemini = createGeminiClient();
+  }
 
   if (gemini) {
     try {
