@@ -1,0 +1,6 @@
+description = "A general command for interacting with PostgreSQL, providing sufficient context."
+prompt = """
+@{../docs/postgres.md}
+
+Given this context, please perform the requested task related to PostgreSQL. Provide sufficient context in the command.
+"""
