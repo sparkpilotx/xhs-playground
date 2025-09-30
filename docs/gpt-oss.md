@@ -1,0 +1,1 @@
+the external guarantee that GPT-OSS 20B is preloaded and the server is reachable
